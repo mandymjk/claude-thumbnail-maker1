@@ -12,15 +12,25 @@ function Controls({
     '#ffffff', '#f8fafc', '#f1f5f9', '#e2e8f0',
     '#000000', '#1e293b', '#334155', '#475569',
     '#ef4444', '#f59e0b', '#10b981', '#3b82f6',
-    '#8b5cf6', '#ec4899'
+    '#8b5cf6'
   ]
 
   const handleCustomColorClick = (e) => {
     e.preventDefault()
     e.stopPropagation()
     if (colorInputRef.current) {
-      colorInputRef.current.click()
+      // 모바일 호환성을 위해 직접 클릭 이벤트 트리거
+      const event = new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      })
+      colorInputRef.current.dispatchEvent(event)
     }
+  }
+
+  const handleColorInputChange = (e) => {
+    onBackgroundColorChange(e.target.value)
   }
 
   return (
@@ -42,9 +52,16 @@ function Controls({
         ref={colorInputRef}
         type="color"
         value={backgroundColor}
-        onChange={(e) => onBackgroundColorChange(e.target.value)}
+        onChange={handleColorInputChange}
         className="hidden-color-input"
-        style={{ position: 'absolute', opacity: 0, pointerEvents: 'none', width: 0, height: 0 }}
+        style={{
+          position: 'absolute',
+          opacity: 0,
+          pointerEvents: 'auto',
+          width: '1px',
+          height: '1px',
+          border: 'none'
+        }}
       />
 
       <div className="preset-colors">
@@ -63,19 +80,24 @@ function Controls({
           onClick={handleCustomColorClick}
           aria-label="커스텀 색상 선택"
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <defs>
-              <linearGradient id="colorGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#ef4444" />
-                <stop offset="25%" stopColor="#f59e0b" />
-                <stop offset="50%" stopColor="#10b981" />
-                <stop offset="75%" stopColor="#3b82f6" />
-                <stop offset="100%" stopColor="#8b5cf6" />
-              </linearGradient>
-            </defs>
-            <circle cx="12" cy="12" r="9" fill="url(#colorGradient)" opacity="0.9" />
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="currentColor" opacity="0.3" />
-          </svg>
+          <div
+            className="color-wheel"
+            style={{
+              width: '100%',
+              height: '100%',
+              borderRadius: '50%',
+              background: `conic-gradient(
+                from 0deg,
+                #ff0000 0deg,
+                #ffff00 60deg,
+                #00ff00 120deg,
+                #00ffff 180deg,
+                #0000ff 240deg,
+                #ff00ff 300deg,
+                #ff0000 360deg
+              )`
+            }}
+          />
         </button>
       </div>
     </div>
