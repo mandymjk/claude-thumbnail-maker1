@@ -17,18 +17,22 @@ function Controls({
       {!hideTitle && <h2 className="section-title">배경색</h2>}
       
       <div className="color-picker-container">
-        <input
-          type="color"
-          value={backgroundColor}
-          onChange={(e) => onBackgroundColorChange(e.target.value)}
-          className="color-input"
-        />
+        <label className="color-input-wrapper">
+          <input
+            type="color"
+            value={backgroundColor}
+            onChange={(e) => onBackgroundColorChange(e.target.value)}
+            className="color-input"
+            id="color-picker-input"
+          />
+        </label>
         <input
           type="text"
           value={backgroundColor}
           onChange={(e) => onBackgroundColorChange(e.target.value)}
           className="color-text-input"
           placeholder="#ffffff"
+          maxLength={7}
         />
       </div>
 
