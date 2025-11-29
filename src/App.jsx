@@ -91,6 +91,11 @@ function App() {
     setImagePositions({})
   }
 
+  const handleSetListImage = () => {
+    // TODO: 내 리스트 이미지 설정 기능 구현
+    alert('내 리스트 이미지로 설정되었습니다!')
+  }
+
   const handleBack = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1)
@@ -152,7 +157,10 @@ function App() {
             <button
               className="footer-button primary"
               onClick={handleImagesComplete}
-              disabled={uploadedImages.length === 0}
+              disabled={
+                uploadedImages.length === 0 ||
+                uploadedImages.length < (selectedLayout ? LAYOUTS.find(l => l.id === selectedLayout)?.slots : 0)
+              }
             >
               다음 단계
             </button>
@@ -186,17 +194,25 @@ function App() {
 
           <div className="step-footer">
             <button
-              className="footer-button secondary"
-              onClick={handleReset}
+              className="footer-button primary full-width"
+              onClick={handleSetListImage}
             >
-              처음부터
+              내 리스트 이미지 설정하기
             </button>
-            <button
-              className="footer-button primary"
-              onClick={handleDownload}
-            >
-              다운로드
-            </button>
+            <div className="footer-button-group">
+              <button
+                className="footer-button secondary"
+                onClick={handleDownload}
+              >
+                다운로드
+              </button>
+              <button
+                className="footer-button secondary"
+                onClick={handleReset}
+              >
+                처음부터
+              </button>
+            </div>
           </div>
         </div>
       )}

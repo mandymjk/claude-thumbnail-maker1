@@ -1,15 +1,16 @@
 import { useEffect, useRef, forwardRef, useState } from 'react'
 import './Canvas.css'
 
-const Canvas = forwardRef(({ 
-  layout, 
-  images, 
-  backgroundColor, 
+const Canvas = forwardRef(({
+  layout,
+  images,
+  backgroundColor,
   imagePositions,
-  onUpdatePosition 
+  onUpdatePosition
 }, ref) => {
   const containerRef = useRef(null)
   const [dragState, setDragState] = useState(null)
+  const [touchState, setTouchState] = useState(null)
   const [loadedImages, setLoadedImages] = useState({})
 
   // 이미지 로드
@@ -149,8 +150,98 @@ const Canvas = forwardRef(({
     const position = imagePositions[img.id] || { x: 0, y: 0, scale: 1 }
     const delta = e.deltaY > 0 ? -0.1 : 0.1
     const newScale = Math.max(0.5, Math.min(3, position.scale + delta))
-    
+
     onUpdatePosition(img.id, { scale: newScale })
+  }
+
+  // 터치 관련 유틸리티 함수
+  const getTouchDistance = (touch1, touch2) => {
+    const dx = touch1.clientX - touch2.clientX
+    const dy = touch1.clientY - touch2.clientY
+    return Math.sqrt(dx * dx + dy * dy)
+  }
+
+  const getTouchCenter = (touch1, touch2) => {
+    return {
+      x: (touch1.clientX + touch2.clientX) / 2,
+      y: (touch1.clientY + touch2.clientY) / 2
+    }
+  }
+
+  // 터치 시작
+  const handleTouchStart = (e, img) => {
+    if (!containerRef.current) return
+
+    const touches = e.touches
+
+    // 단일 터치 - 드래그
+    if (touches.length === 1) {
+      const rect = containerRef.current.getBoundingClientRect()
+      const scaleX = layout.canvasWidth / rect.width
+      const scaleY = layout.canvasHeight / rect.height
+      const position = imagePositions[img.id] || { x: 0, y: 0, scale: 1 }
+
+      setTouchState({
+        imageId: img.id,
+        type: 'drag',
+        startX: touches[0].clientX,
+        startY: touches[0].clientY,
+        initialX: position.x,
+        initialY: position.y,
+        scaleX,
+        scaleY
+      })
+    }
+
+    // 두 손가락 터치 - 핀치
+    else if (touches.length === 2) {
+      const rect = containerRef.current.getBoundingClientRect()
+      const position = imagePositions[img.id] || { x: 0, y: 0, scale: 1 }
+      const initialDistance = getTouchDistance(touches[0], touches[1])
+      const center = getTouchCenter(touches[0], touches[1])
+
+      setTouchState({
+        imageId: img.id,
+        type: 'pinch',
+        initialDistance,
+        initialScale: position.scale,
+        centerX: center.x,
+        centerY: center.y
+      })
+    }
+  }
+
+  // 터치 이동
+  const handleTouchMove = (e, img) => {
+    if (!touchState || !containerRef.current) return
+
+    e.preventDefault()
+    const touches = e.touches
+
+    // 드래그
+    if (touchState.type === 'drag' && touches.length === 1) {
+      const deltaX = (touches[0].clientX - touchState.startX) * touchState.scaleX
+      const deltaY = (touches[0].clientY - touchState.startY) * touchState.scaleY
+
+      onUpdatePosition(touchState.imageId, {
+        x: touchState.initialX + deltaX,
+        y: touchState.initialY + deltaY
+      })
+    }
+
+    // 핀치
+    else if (touchState.type === 'pinch' && touches.length === 2) {
+      const currentDistance = getTouchDistance(touches[0], touches[1])
+      const scale = currentDistance / touchState.initialDistance
+      const newScale = Math.max(0.5, Math.min(3, touchState.initialScale * scale))
+
+      onUpdatePosition(touchState.imageId, { scale: newScale })
+    }
+  }
+
+  // 터치 종료
+  const handleTouchEnd = () => {
+    setTouchState(null)
   }
 
   if (!layout) {
@@ -193,6 +284,9 @@ const Canvas = forwardRef(({
               }}
               onMouseDown={(e) => handleMouseDown(e, img)}
               onWheel={(e) => handleWheel(e, img)}
+              onTouchStart={(e) => handleTouchStart(e, img)}
+              onTouchMove={(e) => handleTouchMove(e, img)}
+              onTouchEnd={handleTouchEnd}
             />
           )
         })}
