@@ -1,0 +1,142 @@
+.image-uploader {
+  width: 100%;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.image-count {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-left: 6px;
+}
+
+.upload-button {
+  width: 100%;
+  height: 52px;
+  padding: 0 20px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--radius-xl);
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  letter-spacing: -0.01em;
+}
+
+.upload-button:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.upload-button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.upload-button:disabled {
+  background: var(--border-color);
+  color: var(--text-tertiary);
+  cursor: not-allowed;
+}
+
+.uploaded-images {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.image-preview {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: var(--background);
+}
+
+.image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.remove-button {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 28px;
+  height: 28px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.remove-button:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: scale(1.05);
+}
+
+.remove-button:active {
+  transform: scale(0.95);
+}
+
+.upload-hint {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 16px;
+  background: var(--background);
+  border-radius: var(--radius-sm);
+  line-height: 1.5;
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+  .upload-button {
+    height: 56px;
+    font-size: 16px;
+  }
+
+  .uploaded-images {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .image-preview {
+    border-radius: var(--radius-md);
+  }
+
+  .remove-button {
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* 작은 모바일 */
+@media (max-width: 360px) {
+  .uploaded-images {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

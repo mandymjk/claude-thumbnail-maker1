@@ -1,0 +1,119 @@
+.controls {
+  width: 100%;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.color-picker-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.color-input {
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  padding: 6px;
+  background: white;
+}
+
+.color-input::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.color-input::-webkit-color-swatch {
+  border: none;
+  border-radius: 8px;
+}
+
+.color-text-input {
+  flex: 1;
+  height: 56px;
+  padding: 0 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-family: 'SF Mono', 'Consolas', monospace;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  background: white;
+  color: var(--text-primary);
+}
+
+.color-text-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 1px var(--primary-color);
+}
+
+.preset-colors {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.preset-color {
+  aspect-ratio: 1;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  padding: 0;
+  position: relative;
+}
+
+.preset-color:hover {
+  transform: scale(1.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+}
+
+.preset-color.selected {
+  border-color: var(--primary-color);
+  border-width: 2.5px;
+  transform: scale(1.08);
+  box-shadow: 0 0 0 2px var(--primary-light);
+  z-index: 2;
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+  .color-picker-container {
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .color-input {
+    width: 60px;
+    height: 60px;
+  }
+
+  .color-text-input {
+    height: 60px;
+    font-size: 16px;
+  }
+
+  .preset-colors {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-bottom: 0;
+  }
+
+  .preset-color {
+    border-radius: var(--radius-md);
+  }
+
+  .preset-color:active {
+    transform: scale(0.95);
+  }
+}

@@ -1,0 +1,92 @@
+.canvas-wrapper {
+  width: 100%;
+  max-width: 900px;
+}
+
+.canvas-container {
+  position: relative;
+  width: 100%;
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.drag-overlay {
+  position: absolute;
+  user-select: none;
+  touch-action: none;
+}
+
+.canvas-placeholder {
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 1 / 1;
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--border-color);
+}
+
+.canvas-placeholder p {
+  color: var(--text-secondary);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.canvas-hint {
+  margin-top: 20px;
+  padding: 16px 20px;
+  background: white;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+}
+
+.canvas-hint p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-align: center;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+  .canvas-wrapper {
+    max-width: 100%;
+  }
+
+  .canvas-container {
+    border-radius: var(--radius-md);
+  }
+
+  .canvas-placeholder {
+    border-radius: var(--radius-md);
+  }
+
+  .canvas-hint {
+    margin-top: 16px;
+    padding: 14px 16px;
+  }
+
+  .canvas-hint p {
+    font-size: 13px;
+  }
+
+  /* 터치 영역 확대 */
+  .drag-overlay {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
