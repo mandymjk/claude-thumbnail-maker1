@@ -311,13 +311,14 @@
   .canvas-section {
     flex-shrink: 0;
     padding: 20px;
+    padding-bottom: 16px;
     background: var(--background);
   }
 
   .controls-section {
     flex-shrink: 0;
     padding: 20px;
-    padding-bottom: 150px; /* 하단 버튼 공간 확보 */
+    padding-bottom: 180px; /* 하단 버튼 공간 확보 */
     background: white;
     border-top: 1px solid var(--divider-color);
   }
