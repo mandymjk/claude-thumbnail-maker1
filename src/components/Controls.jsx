@@ -19,13 +19,8 @@ function Controls({
     e.preventDefault()
     e.stopPropagation()
     if (colorInputRef.current) {
-      // 모바일 호환성을 위해 직접 클릭 이벤트 트리거
-      const event = new MouseEvent('click', {
-        bubbles: true,
-        cancelable: true,
-        view: window
-      })
-      colorInputRef.current.dispatchEvent(event)
+      // 모바일과 데스크톱 모두 지원
+      colorInputRef.current.click()
     }
   }
 
@@ -55,12 +50,13 @@ function Controls({
         onChange={handleColorInputChange}
         className="hidden-color-input"
         style={{
-          position: 'absolute',
+          position: 'fixed',
+          top: '-100px',
+          left: '-100px',
+          width: '50px',
+          height: '50px',
           opacity: 0,
-          pointerEvents: 'auto',
-          width: '1px',
-          height: '1px',
-          border: 'none'
+          pointerEvents: 'none'
         }}
       />
 
@@ -83,9 +79,6 @@ function Controls({
           <div
             className="color-wheel"
             style={{
-              width: '100%',
-              height: '100%',
-              borderRadius: '50%',
               background: `conic-gradient(
                 from 0deg,
                 #ff0000 0deg,
