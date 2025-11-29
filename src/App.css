@@ -282,6 +282,32 @@
     overflow-x: hidden;
   }
 
+  .edit-step .step-footer {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .edit-step .step-footer .footer-button.full-width {
+    flex: 1;
+    width: auto;
+  }
+
+  .edit-step .step-footer .footer-button-group {
+    flex-shrink: 0;
+  }
+
+  .footer-button.icon-button {
+    width: 60px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer-button.icon-button svg {
+    flex-shrink: 0;
+  }
+
   .canvas-section {
     flex-shrink: 0;
     padding: 20px;
