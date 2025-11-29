@@ -106,10 +106,14 @@ function App() {
     <div className="app">
       {/* 모바일 헤더 */}
       <div className="mobile-header">
-        {currentStep > 1 && (
-          <button className="back-button" onClick={handleBack}>
-            ← 이전
+        {currentStep > 1 ? (
+          <button className="back-button" onClick={handleBack} aria-label="이전">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
           </button>
+        ) : (
+          <div style={{ width: '40px' }}></div>
         )}
         <h1>썸네일 메이커</h1>
         <div className="step-indicator">

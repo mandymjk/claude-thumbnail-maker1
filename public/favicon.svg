@@ -1,0 +1,19 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with FLO primary color -->
+  <rect width="128" height="128" fill="#3D4EF7" rx="24"/>
+
+  <!-- Color gradient chip at 50% size (64x64 centered) -->
+  <defs>
+    <linearGradient id="faviconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444" />
+      <stop offset="20%" stop-color="#f59e0b" />
+      <stop offset="40%" stop-color="#10b981" />
+      <stop offset="60%" stop-color="#3b82f6" />
+      <stop offset="80%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#ec4899" />
+    </linearGradient>
+  </defs>
+
+  <!-- Centered circle with gradient -->
+  <circle cx="64" cy="64" r="32" fill="url(#faviconGradient)"/>
+</svg>

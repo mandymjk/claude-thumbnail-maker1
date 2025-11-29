@@ -11,32 +11,11 @@
 }
 
 .color-picker-container {
-  display: flex;
-  gap: 10px;
   margin-bottom: 16px;
 }
 
-.color-input {
-  width: 56px;
-  height: 56px;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  padding: 6px;
-  background: white;
-}
-
-.color-input::-webkit-color-swatch-wrapper {
-  padding: 0;
-}
-
-.color-input::-webkit-color-swatch {
-  border: none;
-  border-radius: 8px;
-}
-
 .color-text-input {
-  flex: 1;
+  width: 100%;
   height: 56px;
   padding: 0 16px;
   border: 1px solid var(--border-color);
@@ -106,13 +85,7 @@
 /* 모바일 최적화 */
 @media (max-width: 768px) {
   .color-picker-container {
-    gap: 12px;
     margin-bottom: 20px;
-  }
-
-  .color-input {
-    width: 60px;
-    height: 60px;
   }
 
   .color-text-input {
