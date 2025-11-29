@@ -249,25 +249,39 @@
     background: white;
     border-top: 1px solid var(--divider-color);
     display: flex;
+    flex-direction: column;
     gap: 10px;
     z-index: 10;
     box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .footer-button.full-width {
+    width: 100%;
+  }
+
+  .footer-button-group {
+    display: flex;
+    gap: 10px;
   }
 
   /* Step 3 편집 화면 */
   .step-container.edit-step {
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .canvas-section {
+    flex-shrink: 0;
     padding: 20px;
     background: var(--background);
-    overflow: auto;
   }
 
   .controls-section {
+    flex-shrink: 0;
     padding: 20px;
+    padding-bottom: 100px; /* 하단 버튼 공간 확보 */
     background: white;
     border-top: 1px solid var(--divider-color);
   }
