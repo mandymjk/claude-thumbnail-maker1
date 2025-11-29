@@ -86,6 +86,23 @@
   z-index: 2;
 }
 
+.preset-color.custom-color-picker {
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+
+.preset-color.custom-color-picker:hover {
+  background: var(--background);
+}
+
+.preset-color.custom-color-picker svg {
+  width: 20px;
+  height: 20px;
+}
+
 /* 모바일 최적화 */
 @media (max-width: 768px) {
   .color-picker-container {
