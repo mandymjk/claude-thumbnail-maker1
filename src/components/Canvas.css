@@ -45,12 +45,8 @@
 }
 
 .canvas-hint {
-  margin-top: 20px;
-  padding: 16px 20px;
-  background: white;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border-color);
+  margin-top: 12px;
+  padding: 0;
 }
 
 .canvas-hint p {
@@ -64,7 +60,8 @@
 /* 모바일 최적화 */
 @media (max-width: 768px) {
   .canvas-wrapper {
-    max-width: 100%;
+    max-width: 80%;
+    margin: 0 auto;
   }
 
   .canvas-container {
@@ -76,8 +73,8 @@
   }
 
   .canvas-hint {
-    margin-top: 16px;
-    padding: 14px 16px;
+    margin-top: 8px;
+    padding: 0;
   }
 
   .canvas-hint p {

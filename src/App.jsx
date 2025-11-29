@@ -201,16 +201,25 @@ function App() {
             </button>
             <div className="footer-button-group">
               <button
-                className="footer-button secondary"
+                className="footer-button secondary icon-button"
                 onClick={handleDownload}
+                title="다운로드"
               >
-                다운로드
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
               </button>
               <button
-                className="footer-button secondary"
+                className="footer-button secondary icon-button"
                 onClick={handleReset}
+                title="처음부터"
               >
-                처음부터
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="23 4 23 10 17 10"></polyline>
+                  <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                </svg>
               </button>
             </div>
           </div>
