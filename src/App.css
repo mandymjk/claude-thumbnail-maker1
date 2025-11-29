@@ -213,13 +213,14 @@
     flex-direction: column;
     height: calc(100vh - 60px);
     background: var(--background);
+    position: relative;
   }
 
   .step-content {
     flex: 1;
     overflow-y: auto;
     padding: 20px;
-    padding-bottom: 80px; /* 하단 버튼 공간 확보 */
+    padding-bottom: 100px; /* 하단 버튼 공간 확보 */
   }
 
   .step-header {
@@ -240,11 +241,17 @@
   }
 
   .step-footer {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
     padding: 16px 20px calc(16px + env(safe-area-inset-bottom));
     background: white;
     border-top: 1px solid var(--divider-color);
     display: flex;
     gap: 10px;
+    z-index: 10;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
   }
 
   /* Step 3 편집 화면 */
