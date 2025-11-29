@@ -293,7 +293,7 @@ const Canvas = forwardRef(({
       </div>
       
       <div className="canvas-hint">
-        <p>💡 이미지를 드래그해서 위치를 조정하고, 마우스 휠로 확대/축소할 수 있어요</p>
+        <p>💡 이미지를 움직여 위치를 조정하고, 확대/축소해 보세요</p>
       </div>
     </div>
   )

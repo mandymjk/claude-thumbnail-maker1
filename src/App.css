@@ -255,6 +255,10 @@
     box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
   }
 
+  .step-footer .footer-button {
+    height: 56px;
+  }
+
   .footer-button.full-width {
     width: 100%;
   }
@@ -281,7 +285,7 @@
   .controls-section {
     flex-shrink: 0;
     padding: 20px;
-    padding-bottom: 100px; /* 하단 버튼 공간 확보 */
+    padding-bottom: 150px; /* 하단 버튼 공간 확보 */
     background: white;
     border-top: 1px solid var(--divider-color);
   }
