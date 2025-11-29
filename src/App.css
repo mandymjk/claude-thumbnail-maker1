@@ -176,11 +176,23 @@
   .back-button {
     background: none;
     border: none;
-    color: var(--primary-color);
-    font-size: 16px;
-    font-weight: 600;
-    padding: 8px 12px;
+    color: var(--text-primary);
+    padding: 8px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    transition: opacity 0.2s ease;
+  }
+
+  .back-button:active {
+    opacity: 0.6;
+  }
+
+  .back-button svg {
+    display: block;
   }
 
   .step-indicator {

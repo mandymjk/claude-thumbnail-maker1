@@ -15,8 +15,12 @@ function Controls({
     '#8b5cf6', '#ec4899'
   ]
 
-  const handleCustomColorClick = () => {
-    colorInputRef.current?.click()
+  const handleCustomColorClick = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    if (colorInputRef.current) {
+      colorInputRef.current.click()
+    }
   }
 
   return (
@@ -25,13 +29,6 @@ function Controls({
 
       <div className="color-picker-container">
         <input
-          ref={colorInputRef}
-          type="color"
-          value={backgroundColor}
-          onChange={(e) => onBackgroundColorChange(e.target.value)}
-          className="color-input"
-        />
-        <input
           type="text"
           value={backgroundColor}
           onChange={(e) => onBackgroundColorChange(e.target.value)}
@@ -39,6 +36,16 @@ function Controls({
           placeholder="#ffffff"
         />
       </div>
+
+      {/* Hidden color picker input */}
+      <input
+        ref={colorInputRef}
+        type="color"
+        value={backgroundColor}
+        onChange={(e) => onBackgroundColorChange(e.target.value)}
+        className="hidden-color-input"
+        style={{ position: 'absolute', opacity: 0, pointerEvents: 'none', width: 0, height: 0 }}
+      />
 
       <div className="preset-colors">
         {presetColors.map(color => (
@@ -51,6 +58,7 @@ function Controls({
           />
         ))}
         <button
+          type="button"
           className="preset-color custom-color-picker"
           onClick={handleCustomColorClick}
           aria-label="커스텀 색상 선택"
