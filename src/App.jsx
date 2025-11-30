@@ -343,6 +343,7 @@ function App() {
             <button
               className="footer-button primary"
               onClick={handleSetListImage}
+              disabled={!selectedLayout || canvasImages.length === 0}
             >
               내 리스트 썸네일로 설정
             </button>
@@ -350,6 +351,7 @@ function App() {
               className="footer-button secondary icon-button"
               onClick={handleDownload}
               title="저장하기"
+              disabled={!selectedLayout || canvasImages.length === 0}
             >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -361,6 +363,7 @@ function App() {
                 className="footer-button secondary icon-button"
                 onClick={handleReset}
                 title="초기화"
+                disabled={!selectedLayout || canvasImages.length === 0}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="23 4 23 10 17 10"></polyline>
