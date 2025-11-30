@@ -10,30 +10,7 @@
   letter-spacing: -0.02em;
 }
 
-.color-picker-container {
-  margin-bottom: 16px;
-}
-
-.color-text-input {
-  width: 100%;
-  height: 56px;
-  padding: 0 16px;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  font-size: 15px;
-  font-family: 'SF Mono', 'Consolas', monospace;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  background: white;
-  color: var(--text-primary);
-}
-
-.color-text-input:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 1px var(--primary-color);
-}
-
+/* 프리셋 색상 그리드 */
 .preset-colors {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -49,6 +26,7 @@
   transition: all 0.15s ease;
   padding: 0;
   position: relative;
+  background: white;
 }
 
 .preset-color:hover {
@@ -65,48 +43,134 @@
   z-index: 2;
 }
 
+/* 커스텀 색상 선택 버튼 */
 .preset-color.custom-color-picker {
-  background: white;
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(135deg, 
+    #ff0000 0%, 
+    #ffff00 16.67%, 
+    #00ff00 33.33%, 
+    #00ffff 50%, 
+    #0000ff 66.67%, 
+    #ff00ff 83.33%, 
+    #ff0000 100%
+  );
+}
+
+.color-picker-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.color-wheel-icon {
+  pointer-events: none;
+  color: white;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 색상 입력 행 */
+.color-input-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.color-label {
+  font-size: 14px;
+  font-weight: 500;
   color: var(--text-secondary);
+  white-space: nowrap;
 }
 
-.preset-color.custom-color-picker:hover {
-  background: var(--background);
+.color-text-input {
+  flex: 1;
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-family: 'SF Mono', 'Consolas', monospace;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  background: white;
+  color: var(--text-primary);
 }
 
-.preset-color.custom-color-picker svg {
-  width: 20px;
-  height: 20px;
+.color-text-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 1px var(--primary-color);
 }
 
 /* 모바일 최적화 */
 @media (max-width: 768px) {
-  .color-picker-container {
-    margin-bottom: 20px;
-  }
-
-  .color-text-input {
-    height: 60px;
-    font-size: 16px; /* iOS 자동 줌 방지 */
+  .section-title {
+    font-size: 16px;
+    margin-bottom: 12px;
   }
 
   .preset-colors {
     grid-template-columns: repeat(7, 1fr);
     gap: 10px;
-    margin-bottom: 0;
+    margin-bottom: 16px;
   }
 
   .preset-color {
     border-radius: var(--radius-md);
-    /* 모바일에서 터치 영역 개선 */
-    min-height: 44px; /* iOS 권장 최소 터치 영역 */
-    touch-action: manipulation;
+    /* 모바일 터치 최적화 */
+    min-height: 44px;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .preset-color:active {
     transform: scale(0.95);
+  }
+
+  /* 커스텀 색상 선택 버튼 - 모바일에서 더 명확하게 */
+  .color-picker-input {
+    /* 모바일에서 터치 영역 확실하게 */
+    z-index: 10;
+  }
+
+  .color-input-row {
+    gap: 8px;
+  }
+
+  .color-label {
+    font-size: 13px;
+  }
+
+  .color-text-input {
+    height: 48px;
+    font-size: 16px; /* iOS 자동 줌 방지 */
+    padding: 0 14px;
+  }
+}
+
+/* 다크모드 대응 */
+@media (prefers-color-scheme: dark) {
+  .preset-color {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .color-text-input {
+    background: var(--background);
+    border-color: var(--border-color);
+    color: var(--text-primary);
   }
 }
