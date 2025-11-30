@@ -149,10 +149,10 @@ function App() {
   const handleGoToFlo = () => {
     setShowListModal(false)
     
-    // 음악 FLO 앱 열기 시도
-    const floScheme = 'flo://open' // 음악 FLO 앱 URL Scheme
+    // 음악 FLO 앱 딥링크
+    const floDeepLink = 'flomusic://view/my' // FLO 앱 내 '내 리스트' 페이지로 이동
     const floWebUrl = 'https://www.music-flo.com' // FLO 웹사이트
-    const floAppStore = 'https://apps.apple.com/kr/app/flo/id1129048043' // iOS 앱스토어 (올바른 앱 ID)
+    const floAppStore = 'https://apps.apple.com/kr/app/flo/id1129048043' // iOS 앱스토어
     const floPlayStore = 'https://play.google.com/store/apps/details?id=com.skt.skaf.l001mtm091' // Android 플레이스토어
     
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
@@ -161,7 +161,7 @@ function App() {
     
     if (isMobile) {
       // 앱 열기 시도
-      window.location.href = floScheme
+      window.location.href = floDeepLink
       
       // 앱이 설치되지 않은 경우 스토어로 이동
       setTimeout(() => {
