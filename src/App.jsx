@@ -149,19 +149,29 @@ function App() {
   const handleGoToFlo = () => {
     setShowListModal(false)
     
-    // FLO 앱 열기 시도
-    const floScheme = 'flo://' // FLO 앱의 URL Scheme
-    const floWebUrl = 'https://www.music-flo.com' // 앱이 없을 때 웹으로 이동
+    // 음악 FLO 앱 열기 시도
+    const floScheme = 'flo://open' // 음악 FLO 앱 URL Scheme
+    const floWebUrl = 'https://www.music-flo.com' // FLO 웹사이트
+    const floAppStore = 'https://apps.apple.com/kr/app/flo/id1035352786' // iOS 앱스토어
+    const floPlayStore = 'https://play.google.com/store/apps/details?id=com.skt.skaf.l001mtm091' // Android 플레이스토어
     
-    // 모바일에서 앱 열기 시도
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent)
+    const isAndroid = /Android/i.test(navigator.userAgent)
     
     if (isMobile) {
+      // 앱 열기 시도
       window.location.href = floScheme
       
-      // 앱이 설치되지 않은 경우 웹으로 이동
+      // 앱이 설치되지 않은 경우 스토어로 이동
       setTimeout(() => {
-        window.location.href = floWebUrl
+        if (isIOS) {
+          window.location.href = floAppStore
+        } else if (isAndroid) {
+          window.location.href = floPlayStore
+        } else {
+          window.location.href = floWebUrl
+        }
       }, 1500)
     } else {
       // 데스크톱에서는 웹으로 이동
@@ -273,7 +283,7 @@ function App() {
               className="footer-button primary full-width"
               onClick={handleSetListImage}
             >
-              내 리스트 이미지로 설정
+              내 리스트 썸네일로 설정
             </button>
             <div className="footer-button-group">
               <button

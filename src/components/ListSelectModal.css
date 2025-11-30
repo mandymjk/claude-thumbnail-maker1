@@ -24,12 +24,12 @@
 
 .modal-content {
   background: white;
-  border-radius: 16px;
+  border-radius: 12px;
   width: 100%;
-  max-width: 340px;
+  max-width: 280px;
   overflow: hidden;
-  animation: scaleUp 0.25s ease;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+  animation: scaleUp 0.2s ease;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.24);
 }
 
 @keyframes scaleUp {
@@ -44,68 +44,69 @@
 }
 
 .modal-body {
-  padding: 28px 24px 24px;
+  padding: 24px 20px 20px;
   text-align: center;
 }
 
 .modal-title {
   font-size: 16px;
-  font-weight: 600;
-  color: #1e293b;
+  font-weight: 500;
+  color: #333333;
   margin: 0 0 8px;
   line-height: 1.5;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.3px;
 }
 
 .modal-subtitle {
-  font-size: 12px;
-  color: #94a3b8;
+  font-size: 13px;
+  color: #999999;
   margin: 0;
   line-height: 1.5;
+  letter-spacing: -0.3px;
 }
 
 .modal-footer {
   display: flex;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid #eeeeee;
 }
 
 .modal-button {
   flex: 1;
-  height: 52px;
+  height: 48px;
   border: none;
   background: white;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 400;
   cursor: pointer;
-  transition: all 0.15s ease;
-  letter-spacing: -0.02em;
+  transition: background 0.15s ease;
+  letter-spacing: -0.3px;
   border-radius: 0;
 }
 
 .modal-button.cancel {
-  color: #64748b;
-  border-right: 1px solid #f1f5f9;
+  color: #666666;
+  border-right: 1px solid #eeeeee;
 }
 
 .modal-button.cancel:hover {
-  background: #f8fafc;
+  background: #fafafa;
 }
 
 .modal-button.cancel:active {
-  background: #f1f5f9;
+  background: #f5f5f5;
 }
 
 .modal-button.confirm {
-  color: var(--primary-color, #6366f1);
-  font-weight: 600;
+  color: #4a7aff;
+  font-weight: 500;
 }
 
 .modal-button.confirm:hover {
-  background: #f8fafc;
+  background: #fafafa;
 }
 
 .modal-button.confirm:active {
-  background: #f1f5f9;
+  background: #f5f5f5;
 }
 
 /* 모바일 최적화 */
@@ -115,7 +116,7 @@
   }
 
   .modal-content {
-    max-width: 320px;
+    max-width: 280px;
   }
 
   .modal-body {
@@ -123,16 +124,15 @@
   }
 
   .modal-title {
-    font-size: 15px;
+    font-size: 16px;
   }
 
   .modal-subtitle {
-    font-size: 11px;
+    font-size: 13px;
   }
 
   .modal-button {
     height: 48px;
-    font-size: 14px;
+    font-size: 15px;
   }
 }
-
