@@ -95,12 +95,10 @@
   background: white;
   border-top: 1px solid var(--divider-color);
   display: flex;
-  flex-direction: column;
   gap: 10px;
 }
 
 .footer-button {
-  flex: 1;
   height: 52px;
   border: none;
   border-radius: var(--radius-xl);
@@ -144,26 +142,23 @@
   transform: scale(0.98);
 }
 
-.footer-button.full-width {
-  width: 100%;
+/* 데스크톱 버튼 레이아웃 */
+.sidebar-footer .footer-button.primary {
+  flex: 1;
+  min-width: 0;
 }
 
-.footer-button-group {
-  display: flex;
-  gap: 10px;
-}
-
-.footer-button.icon-button {
+.sidebar-footer .footer-button.icon-button {
   width: 60px;
   min-width: 60px;
-  flex: 0 0 60px;
+  flex-shrink: 0;
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.footer-button.icon-button svg {
+.sidebar-footer .footer-button.icon-button svg {
   flex-shrink: 0;
 }
 
