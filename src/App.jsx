@@ -341,17 +341,16 @@ function App() {
 
           <div className="sidebar-footer">
             <button
-              className="footer-button primary full-width"
+              className="footer-button primary"
               onClick={handleSetListImage}
             >
               내 리스트 썸네일로 설정
             </button>
-            <div className="footer-button-group">
-              <button
-                className="footer-button secondary icon-button"
-                onClick={handleDownload}
-                title="저장하기"
-              >
+            <button
+              className="footer-button secondary icon-button"
+              onClick={handleDownload}
+              title="저장하기"
+            >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                   <polyline points="7 10 12 15 17 10"></polyline>
@@ -368,7 +367,6 @@ function App() {
                   <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
                 </svg>
               </button>
-            </div>
           </div>
         </div>
 
