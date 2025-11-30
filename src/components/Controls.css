@@ -10,7 +10,7 @@
   letter-spacing: -0.02em;
 }
 
-/* 프리셋 색상 그리드 */
+/* 프리셋 색상 그리드 - 14개 (2줄) */
 .preset-colors {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -72,15 +72,6 @@
   border: none;
   padding: 0;
   margin: 0;
-}
-
-.color-wheel-icon {
-  pointer-events: none;
-  color: white;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 /* 색상 입력 행 */

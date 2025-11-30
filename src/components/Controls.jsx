@@ -7,7 +7,7 @@ function Controls({
 }) {
   const presetColors = [
     '#ffffff', '#f8fafc', '#f1f5f9', '#e2e8f0',
-    '#000000', '#1e293b', '#334155', '#475569',
+    '#000000', '#1e293b', '#475569',
     '#ef4444', '#f59e0b', '#10b981', '#3b82f6',
     '#8b5cf6', '#ec4899'
   ]
@@ -27,7 +27,7 @@ function Controls({
           />
         ))}
         
-        {/* 커스텀 색상 선택 버튼 */}
+        {/* 커스텀 색상 선택 버튼 - 14번째 자리 */}
         <label className="preset-color custom-color-picker" aria-label="커스텀 색상 선택">
           <input
             type="color"
@@ -35,12 +35,6 @@ function Controls({
             onChange={(e) => onBackgroundColorChange(e.target.value)}
             className="color-picker-input"
           />
-          <div className="color-wheel-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
-              <path d="M12 2 L12 12 L22 12" stroke="currentColor" strokeWidth="2" fill="none"/>
-            </svg>
-          </div>
         </label>
       </div>
 
