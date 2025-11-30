@@ -3,6 +3,7 @@ import LayoutSelector from './components/LayoutSelector'
 import ImageUploader from './components/ImageUploader'
 import Canvas from './components/Canvas'
 import Controls from './components/Controls'
+import ListSelectModal from './components/ListSelectModal'
 import { LAYOUTS } from './constants/layouts'
 import './App.css'
 
@@ -13,6 +14,7 @@ function App() {
   const [canvasImages, setCanvasImages] = useState([])
   const [backgroundColor, setBackgroundColor] = useState('#ffffff')
   const [imagePositions, setImagePositions] = useState({})
+  const [showListModal, setShowListModal] = useState(false)
   const canvasRef = useRef(null)
 
   // 레이아웃 변경 시 캔버스 이미지 재배치
@@ -137,8 +139,34 @@ function App() {
   }
 
   const handleSetListImage = () => {
-    // TODO: 내 리스트 이미지 설정 기능 구현
-    alert('내 리스트 이미지로 설정되었습니다!')
+    setShowListModal(true)
+  }
+
+  const handleCloseModal = () => {
+    setShowListModal(false)
+  }
+
+  const handleGoToFlo = () => {
+    setShowListModal(false)
+    
+    // FLO 앱 열기 시도
+    const floScheme = 'flo://' // FLO 앱의 URL Scheme
+    const floWebUrl = 'https://www.music-flo.com' // 앱이 없을 때 웹으로 이동
+    
+    // 모바일에서 앱 열기 시도
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+    
+    if (isMobile) {
+      window.location.href = floScheme
+      
+      // 앱이 설치되지 않은 경우 웹으로 이동
+      setTimeout(() => {
+        window.location.href = floWebUrl
+      }, 1500)
+    } else {
+      // 데스크톱에서는 웹으로 이동
+      window.open(floWebUrl, '_blank')
+    }
   }
 
   const handleBack = () => {
@@ -245,7 +273,7 @@ function App() {
               className="footer-button primary full-width"
               onClick={handleSetListImage}
             >
-              내 리스트 이미지 설정하기
+              내 리스트 이미지로 설정
             </button>
             <div className="footer-button-group">
               <button
@@ -329,6 +357,13 @@ function App() {
           />
         </div>
       </div>
+
+      {/* 리스트 선택 모달 */}
+      <ListSelectModal
+        isOpen={showListModal}
+        onClose={handleCloseModal}
+        onConfirm={handleGoToFlo}
+      />
     </div>
   )
 }
