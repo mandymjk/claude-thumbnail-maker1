@@ -48,8 +48,16 @@ function App() {
   }
 
   const handleImageUpload = (files) => {
+    const layout = selectedLayout ? LAYOUTS.find(l => l.id === selectedLayout) : null
+    const maxSlots = layout ? layout.slots : Infinity
+    
     const imageUrls = Array.from(files).map(file => URL.createObjectURL(file))
-    setUploadedImages(prev => [...prev, ...imageUrls])
+    
+    setUploadedImages(prev => {
+      const combined = [...prev, ...imageUrls]
+      // 최대 슬롯 수만큼만 유지
+      return combined.slice(0, maxSlots)
+    })
   }
 
   const handleRemoveImage = (index) => {
@@ -72,63 +80,22 @@ function App() {
     }))
   }
 
-  const handleDownload = async () => {
+  const handleDownload = () => {
     if (!canvasRef.current) return
 
     const canvas = canvasRef.current
     
-    // 모바일 기기인지 확인
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
-    
-    if (isMobile) {
-      try {
-        // Canvas를 blob으로 변환
-        canvas.toBlob(async (blob) => {
-          if (!blob) {
-            alert('이미지 변환에 실패했습니다.')
-            return
-          }
+    // Canvas를 blob으로 변환하여 다운로드
+    canvas.toBlob((blob) => {
+      if (!blob) return
 
-          // Web Share API를 지원하는지 확인
-          if (navigator.share && navigator.canShare) {
-            try {
-              const file = new File([blob], `thumbnail-${Date.now()}.png`, { type: 'image/png' })
-              
-              if (navigator.canShare({ files: [file] })) {
-                await navigator.share({
-                  files: [file],
-                  title: '썸네일 이미지',
-                  text: '생성된 썸네일입니다'
-                })
-                return
-              }
-            } catch (error) {
-              console.log('Share failed:', error)
-            }
-          }
-
-          // Web Share API를 지원하지 않으면 다운로드 방식 사용
-          const url = URL.createObjectURL(blob)
-          const link = document.createElement('a')
-          link.download = `thumbnail-${Date.now()}.png`
-          link.href = url
-          link.click()
-          URL.revokeObjectURL(url)
-          
-          // 모바일에서 안내 메시지
-          alert('이미지가 다운로드되었습니다.\n다운로드 폴더를 확인해주세요.')
-        }, 'image/png')
-      } catch (error) {
-        console.error('Download error:', error)
-        alert('이미지 저장에 실패했습니다.')
-      }
-    } else {
-      // 데스크톱에서는 기존 다운로드 방식
+      const url = URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.download = `thumbnail-${Date.now()}.png`
-      link.href = canvas.toDataURL('image/png')
+      link.href = url
       link.click()
-    }
+      URL.revokeObjectURL(url)
+    }, 'image/png')
   }
 
   const handleReset = () => {

@@ -50,7 +50,7 @@ function ImageUploader({ uploadedImages, onUpload, onRemove, maxImages, hideTitl
 
       {uploadedImages.length > 0 && (
         <div className="uploaded-images">
-          {uploadedImages.map((image, index) => (
+          {uploadedImages.slice(0, maxImages).map((image, index) => (
             <div key={index} className="image-preview">
               <img src={image} alt={`업로드 ${index + 1}`} />
               <button
