@@ -36,7 +36,7 @@ function ImageUploader({ uploadedImages, onUpload, onRemove, maxImages, hideTitl
         disabled={!maxImages || uploadedImages.length >= maxImages}
       >
         <Upload size={20} />
-        <span>이미지 업로드</span>
+        <span>사진 선택</span>
       </button>
 
       <input

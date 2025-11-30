@@ -174,7 +174,6 @@ function App() {
           <div className="step-content">
             <div className="step-header">
               <h2>레이아웃을 선택하세요</h2>
-              <p>원하는 이미지 구성을 골라주세요</p>
             </div>
             <LayoutSelector
               selectedLayout={selectedLayout}
@@ -189,7 +188,7 @@ function App() {
         <div className="step-container">
           <div className="step-content">
             <div className="step-header">
-              <h2>이미지를 업로드하세요</h2>
+              <h2>사진을 선택하세요</h2>
               <p>
                 {selectedLayout && LAYOUTS.find(l => l.id === selectedLayout)?.name} 레이아웃에는 
                 최대 {selectedLayout && LAYOUTS.find(l => l.id === selectedLayout)?.slots}장의 이미지가 필요해요
