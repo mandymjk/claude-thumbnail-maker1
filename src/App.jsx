@@ -152,7 +152,7 @@ function App() {
     // 음악 FLO 앱 열기 시도
     const floScheme = 'flo://open' // 음악 FLO 앱 URL Scheme
     const floWebUrl = 'https://www.music-flo.com' // FLO 웹사이트
-    const floAppStore = 'https://apps.apple.com/kr/app/flo/id1035352786' // iOS 앱스토어
+    const floAppStore = 'https://apps.apple.com/kr/app/flo/id1129048043' // iOS 앱스토어 (올바른 앱 ID)
     const floPlayStore = 'https://play.google.com/store/apps/details?id=com.skt.skaf.l001mtm091' // Android 플레이스토어
     
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)

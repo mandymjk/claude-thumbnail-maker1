@@ -13,7 +13,7 @@ function ListSelectModal({ isOpen, onClose, onConfirm }) {
     <div className="modal-backdrop" onClick={handleBackdropClick}>
       <div className="modal-content">
         <div className="modal-body">
-          <h3 className="modal-title">썸네일을 설정할 내 리스트를 선택해 주세요.</h3>
+          <h3 className="modal-title">썸네일을 설정할 내 리스트를 선택하세요.</h3>
           <p className="modal-subtitle">썸네일은 비공개 리스트에만 설정할 수 있습니다.</p>
         </div>
         
