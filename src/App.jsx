@@ -150,8 +150,8 @@ function App() {
     setShowListModal(false)
     
     // 음악 FLO 앱 딥링크
-    const floDeepLink = 'flomusic://view/my' // FLO 앱 내 '내 리스트' 페이지로 이동
-    const floWebUrl = 'https://www.music-flo.com' // FLO 웹사이트
+    const floDeepLink = 'flomusic://view/my' //  
+    const floWebUrl = 'https://www.music-flo.com' //  웹사이트
     const floAppStore = 'https://apps.apple.com/kr/app/flo/id1129048043' // iOS 앱스토어
     const floPlayStore = 'https://play.google.com/store/apps/details?id=com.skt.skaf.l001mtm091' // Android 플레이스토어
     

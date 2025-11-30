@@ -95,6 +95,7 @@
   background: white;
   border-top: 1px solid var(--divider-color);
   display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 
@@ -141,6 +142,29 @@
 
 .footer-button.secondary:active {
   transform: scale(0.98);
+}
+
+.footer-button.full-width {
+  width: 100%;
+}
+
+.footer-button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.footer-button.icon-button {
+  width: 60px;
+  min-width: 60px;
+  flex: 0 0 60px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-button.icon-button svg {
+  flex-shrink: 0;
 }
 
 /* 모바일 반응형 (768px 이하) */
