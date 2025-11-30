@@ -150,8 +150,8 @@ function App() {
     setShowListModal(false)
     
     // 음악 FLO 앱 딥링크
-    const floDeepLink = 'flomusic://view/my' //  
-    const floWebUrl = 'https://www.music-flo.com' //  웹사이트
+    const floDeepLink = 'flomusic://view/my' // FLO 앱 내 리스트
+    const floWebMyList = 'https://www.music-flo.com/storage/mylist' // FLO 웹 내 리스트 페이지
     const floAppStore = 'https://apps.apple.com/kr/app/flo/id1129048043' // iOS 앱스토어
     const floPlayStore = 'https://play.google.com/store/apps/details?id=com.skt.skaf.l001mtm091' // Android 플레이스토어
     
@@ -170,12 +170,12 @@ function App() {
         } else if (isAndroid) {
           window.location.href = floPlayStore
         } else {
-          window.location.href = floWebUrl
+          window.location.href = floWebMyList
         }
       }, 1500)
     } else {
-      // 데스크톱에서는 웹으로 이동
-      window.open(floWebUrl, '_blank')
+      // 데스크톱에서는 FLO 웹 내 리스트 페이지로 이동
+      window.open(floWebMyList, '_blank')
     }
   }
 

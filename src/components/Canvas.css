@@ -1,6 +1,6 @@
 .canvas-wrapper {
   width: 100%;
-  max-width: 600px;
+  max-width: 480px;
 }
 
 .canvas-container {
@@ -27,7 +27,7 @@
 
 .canvas-placeholder {
   width: 100%;
-  max-width: 600px;
+  max-width: 480px;
   aspect-ratio: 1 / 1;
   background: white;
   border-radius: var(--radius-lg);
