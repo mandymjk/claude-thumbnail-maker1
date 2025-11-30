@@ -80,22 +80,51 @@ function App() {
     }))
   }
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
     if (!canvasRef.current) return
 
     const canvas = canvasRef.current
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
     
-    // Canvas를 blob으로 변환하여 다운로드
-    canvas.toBlob((blob) => {
-      if (!blob) return
+    if (isMobile) {
+      // 모바일: Web Share API로 갤러리 저장
+      canvas.toBlob(async (blob) => {
+        if (!blob) return
 
-      const url = URL.createObjectURL(blob)
-      const link = document.createElement('a')
-      link.download = `thumbnail-${Date.now()}.png`
-      link.href = url
-      link.click()
-      URL.revokeObjectURL(url)
-    }, 'image/png')
+        try {
+          const file = new File([blob], `thumbnail-${Date.now()}.png`, { type: 'image/png' })
+          
+          // Web Share API 사용 (사용자가 "사진에 저장" 선택 가능)
+          if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+            await navigator.share({
+              files: [file],
+              title: '썸네일 이미지',
+              text: '이미지를 저장하려면 "사진에 저장"을 선택하세요'
+            })
+          } else {
+            // Web Share API 미지원 시: 안내 메시지
+            alert('이 브라우저는 이미지 저장을 지원하지 않습니다.\nChrome 또는 Safari를 사용해주세요.')
+          }
+        } catch (error) {
+          // 사용자가 취소한 경우는 무시
+          if (error.name !== 'AbortError') {
+            console.error('Share error:', error)
+          }
+        }
+      }, 'image/png')
+    } else {
+      // 데스크톱: 파일 다운로드
+      canvas.toBlob((blob) => {
+        if (!blob) return
+
+        const url = URL.createObjectURL(blob)
+        const link = document.createElement('a')
+        link.download = `thumbnail-${Date.now()}.png`
+        link.href = url
+        link.click()
+        URL.revokeObjectURL(url)
+      }, 'image/png')
+    }
   }
 
   const handleReset = () => {
