@@ -146,6 +146,7 @@
 .sidebar-footer .footer-button.primary {
   flex: 1;
   min-width: 0;
+  max-width: calc(100% - 190px);
 }
 
 .sidebar-footer .footer-button.icon-button {
