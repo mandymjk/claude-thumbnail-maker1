@@ -26,7 +26,7 @@
   background: white;
   border-radius: 12px;
   width: 100%;
-  max-width: 300px;
+  max-width: 320px;
   overflow: hidden;
   animation: scaleUp 0.2s ease;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.24);
@@ -72,11 +72,11 @@
 
 .modal-button {
   flex: 1;
-  height: 48px;
+  height: 52px;
   border: none;
   background: white;
-  font-size: 15px;
-  font-weight: 400;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
   transition: background 0.15s ease;
   letter-spacing: -0.3px;
@@ -98,7 +98,7 @@
 
 .modal-button.confirm {
   color: #4a7aff;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .modal-button.confirm:hover {
@@ -116,7 +116,7 @@
   }
 
   .modal-content {
-    max-width: 300px;
+    max-width: 320px;
   }
 
   .modal-body {
@@ -132,7 +132,7 @@
   }
 
   .modal-button {
-    height: 48px;
-    font-size: 15px;
+    height: 52px;
+    font-size: 16px;
   }
 }
