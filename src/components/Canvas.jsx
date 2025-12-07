@@ -69,18 +69,20 @@ const Canvas = forwardRef(({
       ctx.rect(img.x, img.y, img.width, img.height)
       ctx.clip()
 
-      // 이미지 크기 및 위치 계산
+      // 이미지 크기 및 위치 계산 (긴 쪽을 영역에 맞춤)
       const scale = position.scale || 1
       const imgRatio = loadedImg.width / loadedImg.height
       const slotRatio = img.width / img.height
 
       let drawWidth, drawHeight
       if (imgRatio > slotRatio) {
-        drawHeight = img.height * scale
-        drawWidth = drawHeight * imgRatio
-      } else {
+        // 이미지가 더 가로로 긴 경우 -> 가로를 맞춤
         drawWidth = img.width * scale
         drawHeight = drawWidth / imgRatio
+      } else {
+        // 이미지가 더 세로로 긴 경우 -> 세로를 맞춤
+        drawHeight = img.height * scale
+        drawWidth = drawHeight * imgRatio
       }
 
       const offsetX = img.x + (img.width - drawWidth) / 2 + position.x
@@ -89,11 +91,16 @@ const Canvas = forwardRef(({
       ctx.drawImage(loadedImg, offsetX, offsetY, drawWidth, drawHeight)
       ctx.restore()
 
-      // 테두리
-      ctx.strokeStyle = '#e5e7eb'
-      ctx.lineWidth = 2
+      // 그리드 라인 (내부)
+      ctx.strokeStyle = '#d1d5db'
+      ctx.lineWidth = 1
       ctx.strokeRect(img.x, img.y, img.width, img.height)
     })
+
+    // 외곽 테두리 (전체 캔버스)
+    ctx.strokeStyle = '#9ca3af'
+    ctx.lineWidth = 2
+    ctx.strokeRect(0, 0, canvas.width, canvas.height)
   }, [ref, layout, images, backgroundColor, loadedImages, imagePositions])
 
   // 드래그 시작

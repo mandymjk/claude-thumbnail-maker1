@@ -10,7 +10,6 @@
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
   overflow: hidden;
-  border: 1px solid var(--border-color);
 }
 
 .canvas {
