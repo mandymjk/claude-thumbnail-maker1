@@ -7,10 +7,30 @@ function ImageUploader({ uploadedImages, onUpload, onRemove, maxImages, hideTitl
 
   const handleFileChange = (e) => {
     const files = e.target.files
-    if (files.length > 0) {
-      onUpload(files)
-      e.target.value = ''
+    if (files.length === 0) return
+
+    const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']
+    const maxSize = 10 * 1024 * 1024 // 10MB
+
+    const validFiles = Array.from(files).filter(file => {
+      if (!validTypes.includes(file.type)) {
+        console.error('Invalid file type:', file.type)
+        alert(`${file.name}은(는) 지원하지 않는 파일 형식입니다.\n(지원 형식: JPEG, PNG, GIF, WebP)`)
+        return false
+      }
+      if (file.size > maxSize) {
+        console.error('File too large:', file.size)
+        alert(`${file.name}의 크기가 너무 큽니다.\n(최대 크기: 10MB)`)
+        return false
+      }
+      return true
+    })
+
+    if (validFiles.length > 0) {
+      onUpload(validFiles)
     }
+    
+    e.target.value = ''
   }
 
   const handleClick = () => {

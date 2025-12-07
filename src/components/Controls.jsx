@@ -1,5 +1,7 @@
 import './Controls.css'
 
+const isValidHexColor = (color) => /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(color)
+
 function Controls({ 
   backgroundColor, 
   onBackgroundColorChange,
@@ -11,6 +13,28 @@ function Controls({
     '#ef4444', '#f59e0b', '#10b981', '#3b82f6',
     '#8b5cf6', '#ec4899'
   ]
+
+  const handleColorInputChange = (value) => {
+    const sanitized = value.trim()
+    
+    if (sanitized === '') {
+      return
+    }
+    
+    if (!sanitized.startsWith('#')) {
+      return
+    }
+    
+    if (sanitized.length <= 7) {
+      if (sanitized.length === 7 || sanitized.length === 4) {
+        if (isValidHexColor(sanitized)) {
+          onBackgroundColorChange(sanitized)
+        }
+      } else {
+        onBackgroundColorChange(sanitized)
+      }
+    }
+  }
 
   return (
     <div className="controls">
@@ -43,7 +67,7 @@ function Controls({
         <input
           type="text"
           value={backgroundColor}
-          onChange={(e) => onBackgroundColorChange(e.target.value)}
+          onChange={(e) => handleColorInputChange(e.target.value)}
           className="color-text-input"
           placeholder="#ffffff"
           maxLength={7}

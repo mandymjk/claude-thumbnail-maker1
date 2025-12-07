@@ -17,6 +17,19 @@ function App() {
   const [showListModal, setShowListModal] = useState(false)
   const canvasRef = useRef(null)
 
+  // Cleanup: Object URL 메모리 해제
+  useEffect(() => {
+    return () => {
+      uploadedImages.forEach(url => {
+        try {
+          URL.revokeObjectURL(url)
+        } catch (error) {
+          console.error('URL cleanup error:', error)
+        }
+      })
+    }
+  }, [uploadedImages])
+
   // 레이아웃 변경 시 캔버스 이미지 재배치
   useEffect(() => {
     if (selectedLayout && uploadedImages.length > 0) {
@@ -37,10 +50,11 @@ function App() {
 
     setCanvasImages(newCanvasImages)
     
-    const initialPositions = {}
-    newCanvasImages.forEach(img => {
-      initialPositions[img.id] = { x: 0, y: 0, scale: 1 }
-    })
+    const initialPositions = newCanvasImages.reduce((acc, img) => ({
+      ...acc,
+      [img.id]: { x: 0, y: 0, scale: 1 }
+    }), {})
+    
     setImagePositions(initialPositions)
   }
 
@@ -63,6 +77,10 @@ function App() {
   }
 
   const handleRemoveImage = (index) => {
+    const imageToRemove = uploadedImages[index]
+    if (imageToRemove) {
+      URL.revokeObjectURL(imageToRemove)
+    }
     setUploadedImages(prev => prev.filter((_, i) => i !== index))
   }
 
@@ -130,6 +148,15 @@ function App() {
   }
 
   const handleReset = () => {
+    // Object URL 메모리 해제
+    uploadedImages.forEach(url => {
+      try {
+        URL.revokeObjectURL(url)
+      } catch (error) {
+        console.error('URL revoke error:', error)
+      }
+    })
+    
     setCurrentStep(1)
     setSelectedLayout(null)
     setUploadedImages([])
@@ -190,7 +217,7 @@ function App() {
       {/* 모바일 헤더 */}
       <div className="mobile-header">
         {currentStep > 1 ? (
-          <button className="back-button" onClick={handleBack} aria-label="이전">
+          <button className="back-button" onClick={handleBack} aria-label="이전 단계로 돌아가기">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
@@ -286,22 +313,24 @@ function App() {
               내 리스트 썸네일로 설정
             </button>
             <div className="footer-button-group">
-              <button
-                className="footer-button secondary icon-button"
-                onClick={handleDownload}
-                title="저장하기"
-              >
+            <button
+              className="footer-button secondary icon-button"
+              onClick={handleDownload}
+              title="저장하기"
+              aria-label="썸네일 이미지 저장하기"
+            >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                   <polyline points="7 10 12 15 17 10"></polyline>
                   <line x1="12" y1="15" x2="12" y2="3"></line>
                 </svg>
               </button>
-              <button
-                className="footer-button secondary icon-button"
-                onClick={handleReset}
-                title="처음부터"
-              >
+            <button
+              className="footer-button secondary icon-button"
+              onClick={handleReset}
+              title="처음부터"
+              aria-label="처음부터 다시 시작하기"
+            >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="23 4 23 10 17 10"></polyline>
                   <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
@@ -352,6 +381,7 @@ function App() {
               onClick={handleDownload}
               title="저장하기"
               disabled={!selectedLayout || canvasImages.length === 0}
+              aria-label="썸네일 이미지 저장하기"
             >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -364,6 +394,7 @@ function App() {
                 onClick={handleReset}
                 title="초기화"
                 disabled={!selectedLayout || canvasImages.length === 0}
+                aria-label="처음부터 다시 시작하기"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="23 4 23 10 17 10"></polyline>
