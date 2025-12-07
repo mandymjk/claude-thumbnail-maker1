@@ -253,43 +253,45 @@ const Canvas = forwardRef(({
   }
 
   return (
-    <div className="canvas-wrapper">
-      <div 
-        ref={containerRef}
-        className="canvas-container"
-        style={{
-          aspectRatio: `${layout.canvasWidth} / ${layout.canvasHeight}`
-        }}
-      >
-        <canvas ref={ref} className="canvas" />
-        
-        {/* 드래그 오버레이 */}
-        {images.map(img => {
-          const rect = containerRef.current?.getBoundingClientRect()
-          if (!rect) return null
+    <>
+      <div className="canvas-wrapper">
+        <div 
+          ref={containerRef}
+          className="canvas-container"
+          style={{
+            aspectRatio: `${layout.canvasWidth} / ${layout.canvasHeight}`
+          }}
+        >
+          <canvas ref={ref} className="canvas" />
+          
+          {/* 드래그 오버레이 */}
+          {images.map(img => {
+            const rect = containerRef.current?.getBoundingClientRect()
+            if (!rect) return null
 
-          const scaleX = rect.width / layout.canvasWidth
-          const scaleY = rect.height / layout.canvasHeight
+            const scaleX = rect.width / layout.canvasWidth
+            const scaleY = rect.height / layout.canvasHeight
 
-          return (
-            <div
-              key={img.id}
-              className="drag-overlay"
-              style={{
-                left: `${img.x * scaleX}px`,
-                top: `${img.y * scaleY}px`,
-                width: `${img.width * scaleX}px`,
-                height: `${img.height * scaleY}px`,
-                cursor: dragState?.imageId === img.id ? 'grabbing' : 'grab'
-              }}
-              onMouseDown={(e) => handleMouseDown(e, img)}
-              onWheel={(e) => handleWheel(e, img)}
-              onTouchStart={(e) => handleTouchStart(e, img)}
-              onTouchMove={(e) => handleTouchMove(e, img)}
-              onTouchEnd={handleTouchEnd}
-            />
-          )
-        })}
+            return (
+              <div
+                key={img.id}
+                className="drag-overlay"
+                style={{
+                  left: `${img.x * scaleX}px`,
+                  top: `${img.y * scaleY}px`,
+                  width: `${img.width * scaleX}px`,
+                  height: `${img.height * scaleY}px`,
+                  cursor: dragState?.imageId === img.id ? 'grabbing' : 'grab'
+                }}
+                onMouseDown={(e) => handleMouseDown(e, img)}
+                onWheel={(e) => handleWheel(e, img)}
+                onTouchStart={(e) => handleTouchStart(e, img)}
+                onTouchMove={(e) => handleTouchMove(e, img)}
+                onTouchEnd={handleTouchEnd}
+              />
+            )
+          })}
+        </div>
       </div>
       
       {images.length > 0 && (
@@ -297,7 +299,7 @@ const Canvas = forwardRef(({
           <p>💡 이미지를 움직여 위치를 조정하고, 확대/축소해 보세요</p>
         </div>
       )}
-    </div>
+    </>
   )
 })
 
