@@ -16,11 +16,12 @@ function App() {
   const [imagePositions, setImagePositions] = useState({})
   const [showListModal, setShowListModal] = useState(false)
   const canvasRef = useRef(null)
+  const uploadedImagesRef = useRef([])
 
-  // Cleanup: Object URL 메모리 해제
+  // Cleanup: 컴포넌트 언마운트 시 Object URL 메모리 해제
   useEffect(() => {
     return () => {
-      uploadedImages.forEach(url => {
+      uploadedImagesRef.current.forEach(url => {
         try {
           URL.revokeObjectURL(url)
         } catch (error) {
@@ -28,7 +29,7 @@ function App() {
         }
       })
     }
-  }, [uploadedImages])
+  }, [])
 
   // 레이아웃 변경 시 캔버스 이미지 재배치
   useEffect(() => {
@@ -71,8 +72,12 @@ function App() {
     
     setUploadedImages(prev => {
       const combined = [...prev, ...imageUrls]
-      // 최대 슬롯 수만큼만 유지
-      return combined.slice(0, maxSlots)
+      const result = combined.slice(0, maxSlots)
+      
+      // ref에 현재 URL 목록 저장 (cleanup용)
+      uploadedImagesRef.current = result
+      
+      return result
     })
   }
 
@@ -81,7 +86,12 @@ function App() {
     if (imageToRemove) {
       URL.revokeObjectURL(imageToRemove)
     }
-    setUploadedImages(prev => prev.filter((_, i) => i !== index))
+    
+    setUploadedImages(prev => {
+      const result = prev.filter((_, i) => i !== index)
+      uploadedImagesRef.current = result
+      return result
+    })
   }
 
   const handleImagesComplete = () => {
@@ -149,13 +159,15 @@ function App() {
 
   const handleReset = () => {
     // Object URL 메모리 해제
-    uploadedImages.forEach(url => {
+    uploadedImagesRef.current.forEach(url => {
       try {
         URL.revokeObjectURL(url)
       } catch (error) {
         console.error('URL revoke error:', error)
       }
     })
+    
+    uploadedImagesRef.current = []
     
     setCurrentStep(1)
     setSelectedLayout(null)
